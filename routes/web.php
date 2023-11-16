@@ -16,5 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-
+// Ruta SingIn 
+Route::get('/jostin/signin', function () {
+    return view('signIn');
+});
