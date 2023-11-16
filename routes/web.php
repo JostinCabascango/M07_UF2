@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-// Ruta SingIn 
+// Ruta SingIn
 Route::get('/jostin/signin', function () {
     return view('signIn');
+});
+// Ruta SingUp
+Route::get('/marc/signup', function () {
+    return view('signUp');
 });
