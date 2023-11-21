@@ -11,7 +11,7 @@
 <h1>{{$title}}</h1>
 <form action="{{url('/marc/signup')}}" method="post"></form>
 @csrf
-<!-- Aquí puedes agregar los campos del formulario para registrarse -->
+<!--campos del formulario para registrarse -->
 <label for="username">Nombre de Usuario</label>
 <input type="text" id="username" name="username" required>
 

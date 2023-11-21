@@ -12,7 +12,7 @@
     <h1>{{$title}}</h1>
     <form action="{{url('/jostin/signin')}}" method="post"></form>
     @csrf
-    <!-- Aquí puedes agregar los campos del formulario para el inicio de sesión -->
+    <!--campos del formulario para el inicio de sesión -->
     <label for="username">Nombre de Usuario:</label>
     <input type="text" id="username" name="username" required>
 
