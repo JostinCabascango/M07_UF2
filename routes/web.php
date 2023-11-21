@@ -22,4 +22,4 @@ Route::get('/jostin/signin', [SignController::class, 'showSignIn']);
 
 // Ruta SignUp
 
-Route:get('/marc/signup', [SignController::class,'showSignUp']);
+Route::get('/marc/signup', [SignController::class,'showSignUp']);
