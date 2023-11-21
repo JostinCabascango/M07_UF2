@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SignController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 // Ruta SingIn
-Route::get('/jostin/signin', function () {
-    return view('signIn');
-});
-// Ruta SingUp
-Route::get('/marc/signup', function () {
-    return view('signUp');
-});
+Route::get('/jostin/signin', [SignController::class, 'showSignIn']);
+
+// Ruta SignUp
+
+Route:get('/marc/signup', [SignController::class,'showSignUp']);
