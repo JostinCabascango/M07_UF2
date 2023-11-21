@@ -19,3 +19,7 @@ Route::get('/', function () {
 });
 // Ruta SingIn
 Route::get('/jostin/signin', [SignController::class, 'showSignIn']);
+
+// Ruta SignUp
+
+Route:get('/marc/signup', [SignController::class,'showSignUp']);

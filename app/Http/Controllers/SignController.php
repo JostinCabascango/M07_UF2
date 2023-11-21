@@ -8,7 +8,11 @@ class SignController extends Controller
 {
     //
     public function showSignIn(){
-        return view('signin')->with('title' ,'Iniciar Sessio del usuario');
+        return view('signIn')->with('title' ,'Iniciar Sesion del usuario');
+
+    }
+    public function showSignUp(){
+        return view('signUp')->with('title' ,'Creacion de usuario nuevo');
 
     }
 }
