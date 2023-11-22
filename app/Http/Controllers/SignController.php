@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 
 class SignController extends Controller
 {
-    //
-    public function showSignIn(){
-        return view('signIn')->with('title' ,'Iniciar Sesion del usuario');
+    //  Muestra la vista de inicio de sesión.
 
+    public function showSignIn()
+    {
+        return view('signIn')->with('title', 'Iniciar Sesion del usuario');
     }
-    public function showSignUp(){
-        return view('signUp')->with('title' ,'Creacion de usuario nuevo');
+    //  Muestra la vista de registro.
 
+    public function showSignUp()
+    {
+        return view('signUp')->with('title', 'Creacion de usuario nuevo');
     }
 }
