@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SignController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,11 @@ Route::get('/jostin/signin', [SignController::class, 'showSignIn']);
 
 // Ruta SignUp
 Route::get('/marc/signup', [SignController::class, 'showSignUp']);
+
+// Ruta
+Route::post('/login', [LoginController::class, 'login']);
+
+// Ruta para el error de acceso a la pagina de inicio de sesion
+Route::get('/error', function () {
+    return 'Error de acceso';
+})->name('errorAccess.index');
