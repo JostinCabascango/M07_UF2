@@ -9,20 +9,21 @@ class LoginController extends Controller
     // Funcion para iniciar sesion.
     public function login(Request $request)
     {
-        $email = $request->input('email');
-        $password = $request->input('password');
+        // Recoger los datos
+        $email = $request->get('email');
+        $password = $request->get('password');
         // Determinar el tipo de usuario.
-        $userType = $this->determineUserType($email);
+        $tipoUsuario = $this->determineUserType($email);
         // Redireccionar a la vista correspondiente.
-        switch ($userType) {
+        switch ($tipoUsuario) {
             case 'alumne':
-                return view('users.alumne');
+                return view('users.alumne')->with('email', $email);
                 break;
             case 'professor':
-                return view('users.professor');
+                return view('users.professor')->with('email', $email);
                 break;
             case 'admin':
-                return view('admin.centre');
+                return view('admin.centre')->with('email', $email);
                 break;
             default:
                 return redirect()->route('errorAccess.index');
@@ -30,12 +31,24 @@ class LoginController extends Controller
         }
 
     }
+
     // Funcion para determinar el tipo de usuario.
     private function determineUserType($email)
     {
-        $userType = '';
-       // Determinar el tipo de usuario con una array
-
-        return $userType;
+        $tipoUsuario = '';
+        // Array con los correos de los usuarios
+        $alumne = ['alumne@alumne'];
+        $professor = ['professor@professor'];
+        $admin = ['admin@admin'];
+        //Comprobar si el correo introducido es valido para algun tipo de usuario .
+        if (in_array($email, $alumne)) {
+            $tipoUsuario = 'alumne';
+        } elseif (in_array($email, $professor)) {
+            $tipoUsuario = 'professor';
+        } elseif (in_array($email, $admin)) {
+            $tipoUsuario = 'admin';
+        }
+        // Devolver el tipo de usuario.
+        return $tipoUsuario;
     }
 }
