@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <!--Mensaje de bienvenida al usuario -->
+    <h1>Benvingut administrador. El teu email és {{ $email }}.</h1>
 </body>
 </html>

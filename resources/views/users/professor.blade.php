@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <!--Mensaje de bienvenida al usuario -->
+    <h1>Benvingut professor. El teu email és {{ $email }}.</h1>
+
+
+
 </body>
 </html>
