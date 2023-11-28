@@ -15,6 +15,15 @@ class CheckEmailPassword
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Recogemos el email y la contraseña
+        $email = $request->get('email');
+        $password = $request->get('password');
+        // Comprobamos que el email y la contraseña no esten vacios
+        if (empty($email) || empty($password)) {
+            // Si estan vacios redireccionamos a la pagina de error
+            return redirect()->route('errorAccess.index');
+        }
+        // Si no estan vacios continuamos con la peticion
         return $next($request);
     }
 }
