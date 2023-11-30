@@ -10,29 +10,28 @@
 </head>
 
 <body>
-<h1 class="text-3xl font-bold text-center text-gray-800 mt-4">{{$title}}</h1>
-<form action="{{url('login')}}" method="post" class="">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mt-4">{{$title}}</h1>
+    <form action="{{ url('login') }}" method="post" class="max-w-md mx-auto my-10">
         @csrf
-        <div class="">
-            <label class="" for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu email">
+        <div class="mb-4">
+            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+            <input type="email" class="form-input w-full" id="email" name="email" placeholder="Introduce tu email">
         </div>
-        <div class="">
-            <label class="" for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password"
+        <div class="mb-4">
+            <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+            <input type="password" class="form-input w-full" id="password" name="password"
                 placeholder="Introduce tu password">
         </div>
-        <div class="">
-            <input type="checkbox" name="active" value="1" class="form-check-input" />
-            <label class="form-check-label">Remember me</label>
+        <div class="mb-4">
+            <input type="checkbox" name="active" value="1" class="form-checkbox" />
+            <label for="active" class="ml-2 text-gray-700">Remember me</label>
         </div>
-        <div class="">
-            <button type="submit" class="">Submit</button>
+        <div class="mb-4">
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Submit</button>
         </div>
     </form>
     <!-- Enlace para ir a SignUp -->
-    <p>¿No tienes una cuenta? <a href="{{ url('/marc/signup') }}">Crea una cuenta</a></p>
-
+    <p class="text-center">¿No tienes una cuenta? <a href="{{ url('/marc/signup') }}" class="text-blue-500">Crea una cuenta</a></p>
 </body>
 
 </html>
