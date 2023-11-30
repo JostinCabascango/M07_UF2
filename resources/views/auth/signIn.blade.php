@@ -11,7 +11,7 @@
 
 <body>
     <h1 class="text-3xl font-bold text-center text-gray-800 mt-4">{{$title}}</h1>
-    <form action="{{ url('login') }}" method="post" class="max-w-md mx-auto my-10">
+    <form action="{{ route('login') }}" method="post" class="max-w-md mx-auto my-10">
         @csrf
         <div class="mb-4">
             <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
@@ -31,7 +31,7 @@
         </div>
     </form>
     <!-- Enlace para ir a SignUp -->
-    <p class="text-center">¿No tienes una cuenta? <a href="{{ url('/marc/signup') }}" class="text-blue-500">Crea una cuenta</a></p>
+    <p class="text-center">¿No tienes una cuenta? <a href="{{ route('register') }}" class="text-blue-500">Crea una cuenta</a></p>
 </body>
 
 </html>

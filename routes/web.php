@@ -26,8 +26,11 @@ Route::get('/jostin/signin', [SignController::class, 'showSignIn']);
 Route::get('/marc/signup', [SignController::class, 'showSignUp']);
 
 // Ruta para iniciar sesion
-Route::post('/login', [LoginController::class, 'login'])
+Route::post('/login', [LoginController::class, 'login'])->name('login')
     ->middleware('check.email.password');
+// Ruta para registrar un usuario
+Route::post('/register', [LoginController::class, 'register'])
+    ->middleware('check.email.password')->name('register');
 
 // Ruta para el error de acceso a la pagina de inicio de sesion
 Route::get('/error', function () {
