@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <title>{{$title}}</title>
 </head>
 
 <body>
-    <h1>{{$title}}</h1>
-    <form action="{{url('login')}}" method="post" class="">
+<h1 class="text-3xl font-bold text-center text-gray-800 mt-4">{{$title}}</h1>
+<form action="{{url('login')}}" method="post" class="">
         @csrf
         <div class="">
             <label class="" for="email">Email</label>
