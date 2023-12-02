@@ -9,7 +9,7 @@ class LoginController extends Controller
     // Funcion para validar el inicio de sesion de un usuario.
     public function store(Request $request)
     {
-        // Recoger los datos
+        // Recoger los datos del formulario.
         $email = $request->input('email');
         $password = $request->input('password');
         // Determinar el tipo de usuario.
