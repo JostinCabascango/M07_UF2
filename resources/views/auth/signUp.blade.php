@@ -8,7 +8,7 @@
     <title>{{$title}}</title>
 </head>
 
-<body>
+<body class="bg-gray-100">
     <h1 class="text-3xl font-bold text-center text-gray-800 mt-4">{{$title}}</h1>
     <form method="post" action="{{ route('register.store') }}" class="max-w-md mx-auto my-10">
         @csrf
@@ -47,7 +47,8 @@
             <input type="submit" value="Enviar" class="bg-blue-500 text-white py-2 px-4 rounded" />
         </div>
     </form>
-    <p class="text-center">¿tienes una cuenta? <a href="{{ route('login.create') }}" class="text-blue-500">Inicia sesion</a></p>
+    <p class="text-center">¿tienes una cuenta? <a href="{{ route('login.create') }}" class="text-blue-500">Inicia
+            sesion</a></p>
 </body>
 
 </html>

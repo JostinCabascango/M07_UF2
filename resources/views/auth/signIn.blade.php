@@ -9,7 +9,7 @@
     <title>{{$title}}</title>
 </head>
 
-<body>
+<body class="bg-gray-100">
     <h1 class="text-3xl font-bold text-center text-gray-800 mt-4">{{$title}}</h1>
     <form action="{{ route('login.store') }}" method="post" class="max-w-md mx-auto my-10">
         @csrf
@@ -31,7 +31,8 @@
         </div>
     </form>
     <!-- Enlace para ir a SignUp -->
-    <p class="text-center">¿No tienes una cuenta? <a href="{{ route('signup.create') }}" class="text-blue-500">Crea una cuenta</a></p>
+    <p class="text-center">¿No tienes una cuenta? <a href="{{ route('signup.create') }}" class="text-blue-500">Crea una
+            cuenta</a></p>
 </body>
 
 </html>
