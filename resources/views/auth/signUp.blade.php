@@ -34,7 +34,7 @@
         </div>
         <div class="mb-4">
             <label for="rol" class="block text-gray-700 text-sm font-bold mb-2">Rol</label>
-            <select name="rol" class="form-select w-full">
+            <select name="role" class="form-select w-full">
                 <option value="alumnat">alumnat</option>
                 <option value="professorat">professorat</option>
             </select>
