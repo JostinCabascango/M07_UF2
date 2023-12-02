@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SignController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -19,18 +20,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Ruta SingIn
-Route::get('/jostin/signin', [SignController::class, 'showSignIn']);
+// Ruta de la vista de inicio de sesion de un usuario
+Route::get('/login', [SignController::class, 'showSignIn'])->name('login.create');
 
-// Ruta SignUp
-Route::get('/marc/signup', [SignController::class, 'showSignUp']);
+// Ruta de la vista de registro de un usuario
+Route::get('/signup', [SignController::class, 'showSignUp'])->name('signup.create');
 
-// Ruta para iniciar sesion
-Route::post('/login', [LoginController::class, 'login'])->name('login')
+// Ruta para validar el inicio de sesion de un usuario
+Route::post('/login', [LoginController::class, 'store'])->name('login.store')
     ->middleware('check.email.password');
-// Ruta para registrar un usuario
-Route::post('/register', [LoginController::class, 'register'])
-    ->middleware('check.email.password')->name('register');
+// Ruta para registrar un usuario nuevo
+Route::post('/register', [RegisterController::class, 'store'])
+    ->middleware('check.email.password')->name('register.store');
 
 // Ruta para el error de acceso a la pagina de inicio de sesion
 Route::get('/error', function () {
