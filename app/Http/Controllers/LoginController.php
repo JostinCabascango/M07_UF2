@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    // Funcion para iniciar sesion.
-    public function login(Request $request)
+    // Funcion para validar el inicio de sesion de un usuario.
+    public function store(Request $request)
     {
         // Recoger los datos
-        $email = $request->get('email');
-        $password = $request->get('password');
+        $email = $request->input('email');
+        $password = $request->input('password');
         // Determinar el tipo de usuario.
         $tipoUsuario = $this->determineUserType($email);
         // Redireccionar a la vista correspondiente.
