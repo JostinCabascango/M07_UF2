@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // Ruta para la vista de inicio
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 // Ruta de la vista de inicio de sesion de un usuario
 Route::get('/login', [SignController::class, 'showSignIn'])->name('login.create');
