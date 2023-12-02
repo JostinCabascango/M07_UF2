@@ -23,7 +23,8 @@ class LoginController extends Controller
                 return view('users.professor')->with('email', $email);
                 break;
             case 'admin':
-                return view('admin.centre')->with('email', $email);
+                $profesores = $this->createArrayProfessors();
+                return view('admin.centre')->with('email', $email)->with('profesores', $profesores);
                 break;
             default:
                 return redirect()->route('errorAccess.index');
@@ -37,9 +38,9 @@ class LoginController extends Controller
     {
         $tipoUsuario = '';
         // Array con los correos de los usuarios
-        $alumne = ['alumne@alumne'];
-        $professor = ['professor@professor'];
-        $admin = ['admin@admin'];
+        $alumne = ['alumne@alumne.com'];
+        $professor = ['professor@professor.com'];
+        $admin = ['admin@admin.com'];
         //Comprobar si el correo introducido es valido para algun tipo de usuario .
         if (in_array($email, $alumne)) {
             $tipoUsuario = 'alumne';
@@ -50,5 +51,31 @@ class LoginController extends Controller
         }
         // Devolver el tipo de usuario.
         return $tipoUsuario;
+    }
+    // Funcion para crea una array de profesores para la vista de admin.
+    private function createArrayProfessors()
+    {
+        $profesores = [
+            [
+                'id' => 1,
+                'name' => 'Oriol',
+                'email' => 'oriol@professor',
+                'course' => 'DAW2',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Joana',
+                'email' => 'joanna@professor',
+                'course' => 'DAW1',
+
+            ],
+            [
+                'id' => 3,
+                'name' => 'Carla',
+                'email' => 'Carla@professor',
+                'course' => 'DAW2',
+            ],
+        ];
+        return $profesores;
     }
 }
