@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Administrador</title>
 </head>
 <body>
     <!--Mensaje de bienvenida al usuario -->
@@ -22,11 +23,12 @@
     </tr>
     @foreach ($profesores as $profesor)
     <tr>
-        <td>{{ $profesor->id }}</td>
-        <td>{{ $profesor->name }}</td>
-        <td>{{ $profesor->email }}</td>
-        <td>{{ $profesor->course }}</td>
+        <td>{{ $profesor['id'] }}</td>
+        <td>{{ $profesor['name']}}</td>
+        <td>{{ $profesor['email'] }}</td>
+        <td>{{ $profesor['course'] }}</td>
     </tr>
+@endforeach
 </table>
 </body>
 </html>
