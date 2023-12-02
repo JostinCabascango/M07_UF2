@@ -33,7 +33,7 @@
             <input type="email" name="email" class="form-input w-full" />
         </div>
         <div class="mb-4">
-            <label for="rol" class="block text-gray-700 text-sm font-bold mb-2">Rol</label>
+            <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Rol</label>
             <select name="role" class="form-select w-full">
                 <option value="alumnat">alumnat</option>
                 <option value="professorat">professorat</option>
