@@ -17,11 +17,11 @@
             <input type="number" name="user_id" class="form-input w-full" />
         </div>
         <div class="mb-4">
-            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nom</label>
+            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
             <input type="text" name="name" class="form-input w-full" />
         </div>
         <div class="mb-4">
-            <label for="surname" class="block text-gray-700 text-sm font-bold mb-2">Cognoms</label>
+            <label for="surname" class="block text-gray-700 text-sm font-bold mb-2">Apellido</label>
             <input type="text" name="surname" class="form-input w-full" />
         </div>
         <div class="mb-4">
@@ -35,12 +35,12 @@
         <div class="mb-4">
             <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Rol</label>
             <select name="role" class="form-select w-full">
-                <option value="alumnat">alumnat</option>
-                <option value="professorat">professorat</option>
+                <option value="alumnat">Alumno</option>
+                <option value="professorat">Profesor</option>
             </select>
         </div>
         <div class="mb-4">
-            <label for="active" class="block text-gray-700 text-sm font-bold mb-2">Actiu</label>
+            <label for="active" class="block text-gray-700 text-sm font-bold mb-2">Activo</label>
             <input type="checkbox" name="active" value="1" class="form-checkbox" />
         </div>
         <div class="mb-4">
