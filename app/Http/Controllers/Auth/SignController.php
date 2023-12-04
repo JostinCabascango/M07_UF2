@@ -10,12 +10,12 @@ class SignController extends Controller
 
     public function showSignIn()
     {
-        return view('auth.signIn')->with('title', 'Iniciar Sesion del usuario');
+        return view('auth.signIn')->with('title', 'Iniciar sesion');
     }
     //  Muestra la vista de registro.
 
     public function showSignUp()
     {
-        return view('auth.signUp')->with('title', 'Creacion de usuario nuevo');
+        return view('auth.signUp')->with('title', 'Crear una cuenta');
     }
 }
