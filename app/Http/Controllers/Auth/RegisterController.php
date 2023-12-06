@@ -11,36 +11,33 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         // Recoger los datos del formulario
-        $id = $request->input('user_id');
-        $name = $request->input('name');
-        $surname = $request->input('surname');
-        $password = $request->input('password');
-        $email = $request->input('email');
-        $role = $request->input('role');
-        $active = $request->input('active');
-        // Si el rol es "alumnat", es un alumno y se le muestra la vista de alumno
-        if ($role == "alumnat") {
-            $alumno = [
-                'user_id' => $id,
-                'name' => $name,
-                'surname' => $surname,
-                'email' => $email,
-                'role' => $role,
-                'active' => $active
-            ];
-            return view('users.alumne')->with('alumno', $alumno);
+        $userData = $this->getUserData($request);
+        // Determinar el rol del usuario
+        // Si el rol es 'alumnat'
+        if ($userData['role'] == 'alumnat') {
+            // Devolver la vista para el registro de un alumno con los datos del formulario
+            return view('users.perfil')->with('title', 'Informacion del usuario')->with('userData', $userData);
         }
-        // Si el rol es "professorat", es un profesor y se le muestra la vista de profesor
-        if ($role == "professorat") {
-            $profesor = [
-                'user_id' => $id,
-                'name' => $name,
-                'surname' => $surname,
-                'email' => $email,
-                'role' => $role,
-                'active' => $active
-            ];
-            return view('users.professor')->with('profesor', $profesor);
+        // Si el rol es 'professorat'
+        elseif ($userData['role'] == 'professorat') {
+            // Devolver la vista para el registro de un profesor con los datos del formulario
+            return view('users.perfil')->with('title', 'Informacion del usuario')->with('userData', $userData);
         }
+        // Si el rol no es ninguno de los anteriores devolver la vista de error
+        else {
+            return view('auth.errorAccess')->with('title', 'Error de acceso');
+        }
+    }
+    private function getUserData(Request $request)
+    {
+        return [
+            'user_id' => $request->input('user_id'),
+            'name' => $request->input('name'),
+            'surname' => $request->input('surname'),
+            'password' => $request->input('password'),
+            'email' => $request->input('email'),
+            'role' => $request->input('role'),
+            'active' => $request->input('active')
+        ];
     }
 }
