@@ -13,10 +13,6 @@
     <form method="post" action="{{ route('register.store') }}" class="max-w-md mx-auto my-10">
         @csrf
         <div class="mb-4">
-            <label for="user_id" class="block text-gray-700 text-sm font-bold mb-2">Numero</label>
-            <input type="number" name="user_id" class="form-input w-full" />
-        </div>
-        <div class="mb-4">
             <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
             <input type="text" name="name" class="form-input w-full" />
         </div>
