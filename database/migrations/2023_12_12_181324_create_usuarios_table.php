@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('surname');
             $table->string('password');
             $table->string('email')->unique();
-            $table->enum('role', ['alumnat', 'professorat', 'admin']);
+            $table->enum('role', ['estudiante', 'profesor', 'centro']);
             $table->boolean('active'); // 1 = true, 0 = false
         });
     }
