@@ -31,8 +31,10 @@
         <div class="mb-4">
             <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Rol</label>
             <select name="role" class="form-select w-full">
-                <option value="alumnat">Alumno</option>
-                <option value="professorat">Profesor</option>
+                <option value="estudiante">Alumno</option>
+                <option value="profesor">Profesor</option>
+                <option value="centro">Admin</option>
+
             </select>
         </div>
         <div class="mb-4">
