@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Usuario extends Model
 {
     use HasFactory;
+
     // Nombre de la tabla en la base de datos
     protected $table = 'usuarios';
     // Campos que se pueden rellenar en la base de datos
@@ -22,5 +23,7 @@ class Usuario extends Model
     protected $hidden = [
         'password', // Oculta el campo 'password' en las consultas
     ];
-    protected $casts = [];
+    protected $casts = [
+        'password' => 'hashed', // Convierte el campo 'password' en un objeto Hash
+    ];
 }
