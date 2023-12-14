@@ -3,41 +3,35 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
     //
     public function store(Request $request)
     {
-        // Recoger los datos del formulario
-        $userData = $this->getUserData($request);
-        // Determinar el rol del usuario
-        // Si el rol es 'alumnat'
-        if ($userData['role'] == 'alumnat') {
-            // Devolver la vista para el registro de un alumno con los datos del formulario
-            return view('users.perfil')->with('title', 'Informacion del usuario')->with('userData', $userData);
-        }
-        // Si el rol es 'professorat'
-        elseif ($userData['role'] == 'professorat') {
-            // Devolver la vista para el registro de un profesor con los datos del formulario
-            return view('users.perfil')->with('title', 'Informacion del usuario')->with('userData', $userData);
-        }
-        // Si el rol no es ninguno de los anteriores devolver la vista de error
-        else {
-            return view('auth.errorAccess')->with('title', 'Error de acceso');
-        }
-    }
-    private function getUserData(Request $request)
-    {
-        return [
-            'user_id' => $request->input('user_id'),
-            'name' => $request->input('name'),
-            'surname' => $request->input('surname'),
-            'password' => $request->input('password'),
-            'email' => $request->input('email'),
-            'role' => $request->input('role'),
-            'active' => $request->input('active')
-        ];
+        // Validar los datos del formulario.
+        $request->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'role' => 'required',
+            'active' => 'required',
+        ]);
+        // Crear el usuario en la base de datos.
+        $usuario=Usuario::created([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'password' => Hash::make($request->password),
+            'email' => $request->email,
+            'role' => $request->role,
+            'active' => $request->active,
+        ]);
+        // Redireccionar al usuario a la vista de login.
+        return redirect()->route('login.store');
+
     }
 }
