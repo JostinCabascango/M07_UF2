@@ -3,41 +3,53 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Usuario;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
-    //
     public function store(Request $request)
     {
-        // Recoger los datos del formulario
-        $userData = $this->getUserData($request);
-        // Determinar el rol del usuario
-        // Si el rol es 'alumnat'
-        if ($userData['role'] == 'alumnat') {
-            // Devolver la vista para el registro de un alumno con los datos del formulario
-            return view('users.perfil')->with('title', 'Informacion del usuario')->with('userData', $userData);
+        $validatedData = $this->validateRequest($request);
+        $validatedData['password'] = $this->hashPassword($validatedData['password']);
+
+        if ($this->createUser($validatedData)) {
+            return redirect()->route('login.create');
         }
-        // Si el rol es 'professorat'
-        elseif ($userData['role'] == 'professorat') {
-            // Devolver la vista para el registro de un profesor con los datos del formulario
-            return view('users.perfil')->with('title', 'Informacion del usuario')->with('userData', $userData);
-        }
-        // Si el rol no es ninguno de los anteriores devolver la vista de error
-        else {
-            return view('auth.errorAccess')->with('title', 'Error de acceso');
-        }
+
+        return back()->withErrors([
+            'error' => 'Error al registrar el usuario. Por favor, inténtalo de nuevo.',
+        ]);
     }
-    private function getUserData(Request $request)
+
+    private function validateRequest(Request $request)
     {
-        return [
-            'user_id' => $request->input('user_id'),
-            'name' => $request->input('name'),
-            'surname' => $request->input('surname'),
-            'password' => $request->input('password'),
-            'email' => $request->input('email'),
-            'role' => $request->input('role'),
-            'active' => $request->input('active')
-        ];
+        return $request->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required|email|unique:usuarios',
+            'password' => 'required|min:8',
+            'role' => 'required',
+            'active' => 'boolean',
+        ]);
+    }
+
+    private function hashPassword(string $password)
+    {
+        return Hash::make($password);
+    }
+
+    private function createUser(array $userData)
+    {
+        try {
+            Usuario::create($userData);
+            return true;
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return false;
+        }
     }
 }
