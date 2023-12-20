@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SignController;
@@ -27,13 +28,20 @@ Route::get('/login', [SignController::class, 'showSignIn'])->name('login.create'
 Route::get('/signup', [SignController::class, 'showSignUp'])->name('signup.create');
 
 // Ruta para validar el inicio de sesion de un usuario
-Route::post('/login', [LoginController::class, 'store'])->name('login.store')
-    ->middleware('check.email.password');
-// Ruta para registrar un usuario nuevo
-Route::post('/register', [RegisterController::class, 'store'])
-    ->middleware('check.email.password')->name('register.store');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
-// Ruta para el error de acceso a la pagina de inicio de sesion
-Route::get('/error', function () {
-    return 'Error de acceso';
-})->name('errorAccess.index');
+// Ruta para registrar un usuario nuevo
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+// Ruta para la vista de un alumno
+Route::get('/alumno', function () {
+    return view('users.alumne');
+})->name('alumno.index');
+
+// Ruta para la vista de un profesor
+Route::get('/profesor', function () {
+    return view('users.professor');
+})->name('profesor.index');
+
+// Ruta para la vista de un administrador
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
