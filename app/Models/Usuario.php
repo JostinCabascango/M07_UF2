@@ -21,9 +21,6 @@ class Usuario extends Model
         'active'
     ];
     protected $hidden = [
-        'password', // Oculta el campo 'password' en las consultas
-    ];
-    protected $casts = [
-        'password' => 'hashed', // Convierte el campo 'password' en un objeto Hash
+        'password' // Ocultar el campo password al devolver el usuario en una respuesta HTTP
     ];
 }
