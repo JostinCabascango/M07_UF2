@@ -11,8 +11,8 @@ class AdminController extends Controller
     // Ruta para la vista de un administrador
     public function index()
     {
-        $usuarios = Usuario::all();
-        return view('admin.centre')->with('usuarios', $usuarios);
+        $teachers = Usuario::where('role', 'profesor')->get();
+        return view('admin.centre')->with('teachers', $teachers);
     }
 
 

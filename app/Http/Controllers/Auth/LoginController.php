@@ -39,7 +39,7 @@ class LoginController extends Controller
         $routes = [
             'centro' => 'admin.index',
             'estudiante' => 'alumno.index',
-            'profesor' => 'profesor.index',
+            'profesor' => 'teacher.index',
         ];
 
         return redirect()->route($routes[$role]);
