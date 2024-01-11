@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SignController;
+use App\Http\Controllers\Roles\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,10 +39,7 @@ Route::get('/alumno', function () {
     return view('users.alumne');
 })->name('alumno.index');
 
-// Ruta para la vista de un profesor
-Route::get('/profesor', function () {
-    return view('users.professor');
-})->name('profesor.index');
-
 // Ruta para la vista de un administrador
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+// Ruta para la vista de un profesor
+Route::get('/profesor', [TeacherController::class, 'index'])->name('teacher.index');
