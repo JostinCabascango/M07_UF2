@@ -57,6 +57,17 @@ Route::put('/admin/{id}', [AdminController::class, 'update'])->name('admin.updat
 Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
 /* Rutas de un profesor */
-
-// Ruta para la vista de un profesor
+//
 Route::get('/profesor', [TeacherController::class, 'index'])->name('teacher.index');
+//
+Route::get('/profesor/create', TeacherController::class . 'create')->name('teacher.create');
+//
+Route::post('/profesor', TeacherController::class . 'store')->name('teacher.store');
+//
+Route::get('/profesor/{id}', TeacherController::class . 'show')->name('teacher.show');
+//
+Route::get('/profesor/{id}/edit', TeacherController::class . 'edit')->name('teacher.edit');
+//
+Route::put('/profesor/{id}', TeacherController::class . 'update')->name('teacher.update');
+//
+Route::delete('/profesor/{id}', TeacherController::class . 'destroy')->name('teacher.destroy');
