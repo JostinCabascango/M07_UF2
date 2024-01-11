@@ -39,7 +39,24 @@ Route::get('/alumno', function () {
     return view('users.alumne');
 })->name('alumno.index');
 
+/* Rutas de un administrador */
+
 // Ruta para la vista de un administrador
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+// Ruta para la vista de un administrador para crear un profesor
+Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
+// Ruta para la vista de un administrador para crear un profesor
+Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
+// Ruta para mostrar un profesor en concreto
+Route::get('/admin/{id}', [AdminController::class, 'show'])->name('admin.show');
+// Ruta para la vista de un administrador para editar un profesor
+Route::get('/admin/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+// Ruta para la vista de un administrador para editar un profesor
+Route::put('/admin/{id}', [AdminController::class, 'update'])->name('admin.update');
+// Ruta para la vista de un administrador para eliminar un profesor
+Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
+/* Rutas de un profesor */
+
 // Ruta para la vista de un profesor
 Route::get('/profesor', [TeacherController::class, 'index'])->name('teacher.index');
