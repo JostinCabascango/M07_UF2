@@ -17,9 +17,12 @@
         <!--Mensaje de bienvenida al administrador -->
         <h1 class="text-4xl font-bold text-center text-blue-600 py-4">Bienvenido administrador.</h1>
         <!-- Enlace para ir al home -->
-        <div class="flex justify-center">
+        <div class="flex justify-center space-x-4">
             <a href="{{ route('home') }}"
                 class="inline-block px-6 py-4 bg-blue-600 text-white rounded hover:bg-blue-700">Home</a>
+            <!-- Enlace para ir a la vista de crear un profesor -->
+            <a href="{{ route('admin.create') }}"
+                class="inline-block px-6 py-4 bg-green-600 text-white rounded hover:bg-green-700">Crear Profesor</a>
         </div>
         <!-- Listado de usuarios -->
         <!--Si hay Profesores , mostrar el listado de profesores -->
@@ -50,15 +53,22 @@
                             <td class="border px-6 py-4">{{ $teacher->email }}</td>
                             <td class="border px-6 py-4">{{ $teacher->role }}</td>
                             <td class="border px-6 py-4">{{ $teacher->active }}</td>
-                            <td class="border px-6 py-4">
+                            <td class="border px-6 py-4 flex items-center space-x-4">
                                 <!-- Enlace para ir a la vista de editar un registro-->
-                                <a href="#" class="bg-yellow-300 px-5 py-3 mr-2 rounded-md text-white font-bold">
+                                <a href="{{ route('admin.edit', $teacher->id) }}"
+                                    class="bg-yellow-300 px-3 py-2 rounded-md text-white font-bold flex items-center">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <!-- Enlace para eliminar un registro-->
-                                <a href="#" class="bg-red-300 px-5 py-3 rounded-md text-white font-bold">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
+                                <form action="{{ route('admin.destroy', $teacher->id) }}" method="post"
+                                    class="flex items-center">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="bg-red-300 px-3 py-2 rounded-md text-white font-bold flex items-center">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
