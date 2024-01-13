@@ -42,22 +42,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($teachers as $teacher)
+                    @foreach($teachers as $student)
                     <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
-                        <td class="border px-6 py-4">{{ $teacher->id }}</td>
-                        <td class="border px-6 py-4">{{ $teacher->name }}</td>
-                        <td class="border px-6 py-4">{{ $teacher->surname }}</td>
-                        <td class="border px-6 py-4">{{ $teacher->email }}</td>
-                        <td class="border px-6 py-4">{{ $teacher->role }}</td>
-                        <td class="border px-6 py-4">{{ $teacher->active }}</td>
+                        <td class="border px-6 py-4">{{ $student->id }}</td>
+                        <td class="border px-6 py-4">{{ $student->name }}</td>
+                        <td class="border px-6 py-4">{{ $student->surname }}</td>
+                        <td class="border px-6 py-4">{{ $student->email }}</td>
+                        <td class="border px-6 py-4">{{ $student->role }}</td>
+                        <td class="border px-6 py-4">{{ $student->active }}</td>
                         <td class="border px-6 py-4 flex justify-center space-x-4">
                             <!-- Enlace para ir a la vista de editar un registro-->
-                            <a href="{{ route('admin.edit', $teacher->id) }}"
+                            <a href="{{ route('admin.edit', $student->id) }}"
                                 class="bg-yellow-300 px-3 py-2 rounded-md text-white font-bold flex items-center">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                             <!-- Enlace para eliminar un registro-->
-                            <form action="{{ route('admin.destroy', $teacher->id) }}" method="post"
+                            <form action="{{ route('admin.destroy', $student->id) }}" method="post"
                                 class="flex items-center">
                                 @csrf
                                 @method('DELETE')
@@ -67,7 +67,7 @@
                                 </button>
                             </form>
                             <!--Enlace para ver la información del profesor-->
-                            <a href="{{ route('admin.show', $teacher->id) }}"
+                            <a href="{{ route('admin.show', $student->id) }}"
                                 class="bg-blue-300 px-3 py-2 rounded-md text-white font-bold flex items-center">
                                 <i class="fa-solid fa-eye"></i>
                             </a>

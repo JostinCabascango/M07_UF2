@@ -12,7 +12,7 @@ class AdminController extends Controller
     public function index()
     {
         $teachers = $this->getAllTeachers();
-        return view('admin.centre', compact('teachers'));
+        return view('admin.index', compact('teachers'));
     }
 
     public function create()
