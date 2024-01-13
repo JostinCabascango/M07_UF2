@@ -6,89 +6,113 @@ use App\Http\Controllers\Controller;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+// CRUD de un administrador para un profesor
 class AdminController extends Controller
 {
-    // Ruta para la vista de un administrador
     public function index()
     {
-        $teachers = Usuario::where('role', 'profesor')->get();
-        return view('admin.centre')->with('teachers', $teachers);
+        $teachers = $this->getAllTeachers();
+        return view('admin.centre', compact('teachers'));
     }
-    // Ruta para la vista de un administrador para crear un profesor
+
     public function create()
     {
-        return view('teachers.create');
+        $userTypes = $this->getUserTypes();
+        $userType = 'profesor';
+        return view('teachers.create', compact('userType', 'userTypes'));
     }
-    // Almacenar un profesor en la base de datos
+
     public function store(Request $request)
     {
-        // Validar la solicitud
-        $request->validate([
-            'name' => 'required',
-            'surname' => 'required',
-            'email' => 'required|email|unique:usuarios',
-            'password' => 'required|min:8',
-            'role' => 'required',
-            'active' => 'boolean',
-        ]);
-        // Crear el usuario
-        Usuario::create([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'email' => $request->email,
-            // encripta la contraseña
-            'password' => Hash::make($request->password),
-            'role' => $request->role,
-            'active' => $request->active,
-        ]);
-        // Redirigir al usuario a la vista de administrador
+        $this->validateRequest($request);
+        $this->createTeacher($request);
         return redirect()->route('admin.index')->with('success', 'Teacher created successfully.');
     }
-    // Ruta para mostrar un profesor en concreto
+
     public function show($id)
     {
-        return view('teachers.show');
+        $teacher = $this->findTeacher($id);
+        return view('teachers.show', compact('teacher'));
     }
-    // Ruta que muestra el formulario para editar un profesor en concreto
+
     public function edit($id)
     {
-        $teacher = Usuario::find($id);
-        return view('teachers.edit')->with('teacher', $teacher);
+        $teacher = $this->findTeacher($id);
+        return view('teachers.edit', compact('teacher'));
     }
-    // Actualizara un profesor existente en la base de datos
+
     public function update(Request $request, $id)
     {
-        // Validar la solicitud
-        $request->validate([
+        $this->validateRequest($request, $id);
+        $this->updateTeacher($request, $id);
+        return redirect()->route('admin.index');
+    }
+
+    public function destroy($id)
+    {
+        $this->deleteTeacher($id);
+        return redirect()->route('admin.index')->with('success', 'Teacher deleted successfully');
+    }
+
+    private function getAllTeachers()
+    {
+        return Usuario::where('role', 'profesor')->get();
+    }
+
+    private function getUserTypes()
+    {
+        return [
+            'profesor' => 'Profesor',
+            'estudiante' => 'Estudiante',
+            'centro' => 'Administrador'
+        ];
+    }
+
+    private function validateRequest(Request $request, $id = null)
+    {
+        $rules = [
             'name' => 'required',
             'surname' => 'required',
             'email' => 'required|email|unique:usuarios,email,' . $id,
             'role' => 'required',
             'active' => 'boolean',
-        ]);
-        // Buscar al usuario
-        $teacher = Usuario::find($id);
-        // Actualizar los datos del usuario
-        $teacher->name = $request->name;
-        $teacher->surname = $request->surname;
-        $teacher->email = $request->email;
-        $teacher->role = $request->role;
-        $teacher->active = $request->active;
-        // Guardar los cambios
-        $teacher->save();
-        // Redirigir al usuario según su rol
-        return redirect()->route('admin.index');
-    }
-    // Eliminara un profesor existente en la base de datos
-    public function destroy($id)
-    {
-        // Buscar al usuario
-        $teacher = Usuario::find($id);
-        // Eliminar al usuario
-        $teacher->delete();
+        ];
 
-        return redirect()->route('admin.index')
-            ->with('success', 'Post deleted successfully');
+        // Solo validar la contraseña cuando se está creando un nuevo profesor
+        if (!$id) {
+            $rules['password'] = 'required|min:8';
+        }
+
+        $request->validate($rules);
+    }
+
+    private function createTeacher(Request $request)
+    {
+        Usuario::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'active' => $request->active,
+        ]);
+    }
+
+    private function findTeacher($id)
+    {
+        return Usuario::find($id);
+    }
+
+    private function updateTeacher(Request $request, $id)
+    {
+        $teacher = $this->findTeacher($id);
+        $requestData = $request->except('role', 'password'); // Excluye 'role' y 'password' de los datos de la petición
+        $teacher->update($requestData);
+    }
+
+    private function deleteTeacher($id)
+    {
+        $teacher = $this->findTeacher($id);
+        $teacher->delete();
     }
 }
