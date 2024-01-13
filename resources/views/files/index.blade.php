@@ -18,7 +18,11 @@
         <a href="{{ route('file.create') }}"
             class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <i class="fas fa-upload mr-2"></i>
-            Upload New File
+            Cargar nuevo archivo </a>
+        <a href="{{ route('student.index') }}"
+            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 ml-4">
+            <i class="fas fa-folder-open mr-2"></i>
+            Ver mis archivos
         </a>
         <div class="mt-6 bg-white shadow overflow-hidden sm:rounded-md">
             <ul class="divide-y divide-gray-200">
