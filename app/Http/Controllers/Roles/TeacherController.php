@@ -36,7 +36,7 @@ class TeacherController extends Controller
     {
         $this->validateRequest($request);
         $this->createStudent($request);
-        return redirect()->route('admin.index')->with('success', 'Student created successfully.');
+        return redirect()->route('teacher.index')->with('success', 'Student created successfully.');
     }
 
     /**
@@ -60,10 +60,10 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, $id)
     {
-        $this->validateRequest($request, $usuario->id);
-        $this->updateStudent($request, $usuario->id);
+        $this->validateRequest($request, $id);
+        $this->updateStudent($request, $id);
 
         return redirect()->route('teacher.index');
     }
