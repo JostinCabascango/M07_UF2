@@ -23,7 +23,7 @@ class FileController extends Controller
      */
     public function create()
     {
-        //
+        return view('files.create');
     }
 
     /**
@@ -31,8 +31,43 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validateRequest($request);
+
+        $uploadedFile = $request->file('file');
+        $userId = session('user_id');
+
+        $this->storeFile($uploadedFile, $userId);
+
+        return redirect()->route('file.index');
     }
+
+    private function validateRequest(Request $request)
+    {
+        $request->validate([
+                'file' => 'required|file|max:4096']
+        );
+    }
+
+    private function storeFile($uploadedFile, $userId)
+    {
+        $fileName = $uploadedFile->getClientOriginalName();
+        $filePath = 'uploads' . '/' . $fileName;
+        $fileExtension = $uploadedFile->extension();
+        $fileType = $uploadedFile->getMimeType();
+
+        $uploadedFile->storeAs('public/uploads', $fileName);
+
+        $file = File::create([
+            'name' => $fileName,
+            'path' => $filePath,
+            'type' => $fileType,
+            'extension' => $fileExtension,
+            'user_id' => $userId,
+        ]);
+
+        $file->save();
+    }
+
 
     /**
      * Display the specified resource.
@@ -61,8 +96,21 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(File $file)
+    public function destroy($id)
     {
-        //
+        $this->deleteFile($id);
+        return redirect()->route('file.index');
+    }
+
+    private function deleteFile($id)
+    {
+        $file = $this->findFile($id);
+        $file->delete();
+    }
+
+    private function findFile($id)
+    {
+        $file = File::find($id);
+        return $file;
     }
 }

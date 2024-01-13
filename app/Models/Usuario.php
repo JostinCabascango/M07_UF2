@@ -23,4 +23,8 @@ class Usuario extends Model
     protected $hidden = [
         'password' // Ocultar el campo password al devolver el usuario en una respuesta HTTP
     ];
+    public function files()
+    {
+        return $this->hasMany(File::class, 'user_id');
+    }
 }
