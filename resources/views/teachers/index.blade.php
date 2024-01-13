@@ -13,59 +13,66 @@
 </head>
 
 <body class="bg-gray-100">
-    <div class="container mx-auto px-4">
-        <!--Mensaje de bienvenida al profesor -->
-        <h1 class="text-4xl font-bold text-center text-blue-600 py-4">Bienvenido, {{ session('usuario')->name }}.</h1>
-        <!-- Enlace para ir al home -->
-        <div class="flex justify-center">
-            <a href="{{ route('home') }}"
-                class="inline-block px-6 py-4 bg-blue-600 text-white rounded hover:bg-blue-700">Home</a>
-        </div>
-        <!-- Lista de estudiantes -->
-        <div class="mt-6">
-            <div class="bg-white shadow-md rounded p-6">
-                <h1 class="block text-gray-700 font-bold mb-2 text-xl text-center py-4 bg-gray-200 rounded-t">
-                    Lista de alumnos</h1>
-                <!--Si hay Alumnos , mostrar el listado de alumnos -->
-                @if (count($students) > 0)
-                <div class="mt-6">
-                    <div class="bg-white shadow-md rounded overflow-x-auto">
-                        <h2 class="block text-gray-700 font-bold mb-2 text-xl text-center py-4 bg-gray-200 rounded-t">
-                            Alumnos
-                        </h2>
-                        <table class="w-full">
-                            <thead>
-                                <tr class="bg-gray-100">
-                                    <th class="px-6 py-4">ID</th>
-                                    <th class="px-6 py-4">Nombre</th>
-                                    <th class="px-6 py-4">Apellido</th>
-                                    <th class="px-6 py-4">Email</th>
-                                    <th class="px-6 py-4">Rol</th>
-                                    <th class="px-6 py-4">Activo</th>
-                                    <th class="px-6 py-4">Acciones</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
+<div class="container mx-auto px-4">
+    <!--Mensaje de bienvenida al administrador -->
+    <h1 class="text-4xl font-bold text-center text-blue-600 py-4">Bienvenido Profesor.</h1>
+    <!-- Enlace para ir al home -->
+    <div class="flex justify-center space-x-4 mb-6">
+        <a href="{{ route('home') }}"
+           class="inline-block px-6 py-4 bg-blue-600 text-white rounded hover:bg-blue-700">Home</a>
+        <!-- Enlace para ir a la vista de crear un profesor -->
+        <a href="{{ route('admin.create') }}"
+           class="inline-block px-6 py-4 bg-green-600 text-white rounded hover:bg-green-700">Crear estudiante</a>
+    </div>
+    <!-- Listado de usuarios -->
+    <!--Si hay Profesores , mostrar el listado de profesores -->
+    @if (count($students) > 0)
+        <div class="bg-white shadow-md rounded overflow-x-auto">
+            <h1 class="block text-gray-700 font-bold mb-2 text-xl text-center py-4 bg-gray-200 rounded-t">Estudiantes
+            </h1>
+            <table class="w-full text-center">
+                <thead>
+                <tr class="bg-gray-100">
+                    <th class="px-6 py-4">ID</th>
+                    <th class="px-6 py-4">Nombre</th>
+                    <th class="px-6 py-4">Apellido</th>
+                    <th class="px-6 py-4">Email</th>
+                    <th class="px-6 py-4">Rol</th>
+                    <th class="px-6 py-4">Activo</th>
+                    <th class="px-6 py-4">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
                                 @foreach($students as $student)
-                                <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
+                                    <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
                                     <td class="border px-6 py-4">{{ $student->id }}</td>
                                     <td class="border px-6 py-4">{{ $student->name }}</td>
                                     <td class="border px-6 py-4">{{ $student->surname }}</td>
                                     <td class="border px-6 py-4">{{ $student->email }}</td>
                                     <td class="border px-6 py-4">{{ $student->role }}</td>
                                     <td class="border px-6 py-4">{{ $student->active }}</td>
-                                    <td class="border px-6 py-4">
-                                        <!-- Enlace para ir a la vista de editar un registro-->
-                                        <a href="#"
-                                            class="bg-yellow-300 px-5 py-3 mr-2 rounded-md text-white font-bold">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                        <!-- Enlace para eliminar un registro-->
-                                        <a href="#" class="bg-red-300 px-5 py-3 rounded-md text-white font-bold">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                    </td>
+                                        <td class="border px-6 py-4 flex justify-center space-x-4">
+                                            <!-- Enlace para ir a la vista de editar un registro-->
+                                            <a href="{{ route('admin.edit', $student->id) }}"
+                                               class="bg-yellow-300 px-3 py-2 rounded-md text-white font-bold flex items-center">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <!-- Enlace para eliminar un registro-->
+                                            <form action="{{ route('admin.destroy', $student->id) }}" method="post"
+                                                  class="flex items-center">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                        class="bg-red-300 px-3 py-2 rounded-md text-white font-bold flex items-center">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                            <!--Enlace para ver la información del profesor-->
+                                            <a href="{{ route('admin.show', $student->id) }}"
+                                               class="bg-blue-300 px-3 py-2 rounded-md text-white font-bold flex items-center">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                        </td>
                                 </tr>
                                 @endforeach
                             </tbody>

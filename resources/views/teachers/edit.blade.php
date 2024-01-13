@@ -8,13 +8,13 @@
     <title>Update</title>
 </head>
 <body>
-<h1 class="text-3xl font-bold text-center text-gray-800 mt-4">Formulario para editar el profesor {{$teacher->name}}</h1>
-<form method="post" action="{{ route('admin.update',$teacher->id) }}" class="max-w-md mx-auto my-10">
+<h1 class="text-3xl font-bold text-center text-gray-800 mt-4">Formulario para editar el profesor {{$student->name}}</h1>
+<form method="post" action="{{ route('admin.update',$student->id) }}" class="max-w-md mx-auto my-10">
     @csrf
     @method('PUT')
     <div class="mb-4">
         <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
-        <input type="text" name="name" class="form-input w-full" value="{{ $teacher->name }}" />
+        <input type="text" name="name" class="form-input w-full" value="{{ $student->name }}" />
         <!-- Mostrar un mensaje de error si el nombre es incorrecto -->
         @error('name')
         <small class="text-red-500">{{ $message }}</small>
@@ -22,7 +22,7 @@
     </div>
     <div class="mb-4">
         <label for="surname" class="block text-gray-700 text-sm font-bold mb-2">Apellido</label>
-        <input type="text" name="surname" class="form-input w-full" value="{{ $teacher->surname }}" />
+        <input type="text" name="surname" class="form-input w-full" value="{{ $student->surname }}" />
         <!-- Mostrar un mensaje de error si el apellido es incorrecto -->
         @error('surname')
         <small class="text-red-500">{{ $message }}</small>
@@ -30,7 +30,7 @@
     </div>
     <div class="mb-4">
         <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-        <input type="email" name="email" class="form-input w-full" value="{{ $teacher->email }}"/>
+        <input type="email" name="email" class="form-input w-full" value="{{ $student->email }}"/>
         <!-- Mostrar un mensaje de error si el email es incorrecto -->
         @error('email')
         <small class="text-red-500">{{ $message }}</small>
