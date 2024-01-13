@@ -53,12 +53,12 @@
                                     <td class="border px-6 py-4">{{ $student->active }}</td>
                                         <td class="border px-6 py-4 flex justify-center space-x-4">
                                             <!-- Enlace para ir a la vista de editar un registro-->
-                                            <a href="{{ route('admin.edit', $student->id) }}"
+                                            <a href="{{ route('teacher.edit', $student->id) }}"
                                                class="bg-yellow-300 px-3 py-2 rounded-md text-white font-bold flex items-center">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
                                             <!-- Enlace para eliminar un registro-->
-                                            <form action="{{ route('admin.destroy', $student->id) }}" method="post"
+                                            <form action="{{ route('teacher.destroy', $student->id) }}" method="post"
                                                   class="flex items-center">
                                                 @csrf
                                                 @method('DELETE')
@@ -68,7 +68,7 @@
                                                 </button>
                                             </form>
                                             <!--Enlace para ver la información del profesor-->
-                                            <a href="{{ route('admin.show', $student->id) }}"
+                                            <a href="{{ route('teacher.show', $student->id) }}"
                                                class="bg-blue-300 px-3 py-2 rounded-md text-white font-bold flex items-center">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>

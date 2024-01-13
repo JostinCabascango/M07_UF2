@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1 class="text-3xl font-bold text-center text-gray-800 mt-4">Formulario para editar el profesor {{$student->name}}</h1>
-<form method="post" action="{{ route('admin.update',$student->id) }}" class="max-w-md mx-auto my-10">
+<form method="post" action="{{ route('teacher.update',$student->id) }}" class="max-w-md mx-auto my-10">
     @csrf
     @method('PUT')
     <div class="mb-4">

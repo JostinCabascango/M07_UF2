@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Ruta para la vista de inicio
 Route::view('/', 'welcome')->name('home');
-
 
 Route::prefix('login')->group(function () {
     Route::get('/', [SignController::class, 'showSignIn'])->name('login.create');
@@ -28,11 +26,6 @@ Route::prefix('login')->group(function () {
 
 Route::get('/signup', [SignController::class, 'showSignUp'])->name('signup.create');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-
-// Ruta para la vista de un alumno
-Route::get('/alumno', function () {
-    return view('users.alumne');
-})->name('alumno.index');
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
@@ -53,4 +46,5 @@ Route::prefix('profesor')->group(function () {
     Route::put('/{id}', [TeacherController::class, 'update'])->name('teacher.update');
     Route::delete('/{id}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
 });
+
 Route::view('/alumno', 'users.alumne')->name('alumno.index');
