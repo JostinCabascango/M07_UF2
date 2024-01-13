@@ -44,7 +44,7 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-        $student = $this->findTeacher($id);
+        $student = $this->findStudent($id);
         return view('teachers.show', compact('student'));
     }
 
@@ -53,7 +53,7 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        $student = $this->findTeacher($id);
+        $student = $this->findStudent($id);
         return view('teachers.edit', compact('student'));
     }
 
@@ -71,9 +71,9 @@ class TeacherController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuario $usuario)
+    public function destroy($id)
     {
-        $this->deleteStudent($usuario->id);
+        $this->deleteStudent($id);
         return redirect()->route('teacher.index')->with('success', 'Student deleted successfully');
     }
 
@@ -118,21 +118,21 @@ class TeacherController extends Controller
             'active' => $request->active,
         ]);
     }
-    private function findTeacher($id)
+    private function findStudent($id)
     {
         return Usuario::find($id);
     }
 
     private function updateStudent(Request $request, $id)
     {
-        $student = $this->findTeacher($id);
+        $student = $this->findStudent($id);
         $requestData = $request->except('role', 'password'); // Excluye 'role' y 'password' de los datos de la petición
         $student->update($requestData);
     }
 
     private function deleteStudent($id)
     {
-        $student = $this->findTeacher($id);
+        $student = $this->findStudent($id);
         $student->delete();
     }
 }
