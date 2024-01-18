@@ -23,7 +23,7 @@
             <p class="text-lg mb-2"><i class="fas fa-file-alt mr-2"></i>{{ $file->name }}</p>
             <a href="{{ route('file.update', $file->id) }}" class="text-blue-500 hover:underline"><i
                     class="fas fa-edit mr-2"></i>Cambiar nombre</a>
-            <form action="{{ route('file.destroy', $file->id) }}" method="POST" class="mt-2">
+            <form action="{{ route('student.destroy', $file->id) }}" method="POST" class="mt-2">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="text-red-500 hover:underline"><i

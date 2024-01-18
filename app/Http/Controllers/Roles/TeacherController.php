@@ -45,6 +45,7 @@ class TeacherController extends Controller
     public function show($id)
     {
         $student = $this->findStudent($id);
+
         return view('teachers.show', compact('student'));
     }
 
@@ -54,7 +55,9 @@ class TeacherController extends Controller
     public function edit($id)
     {
         $student = $this->findStudent($id);
-        return view('teachers.edit', compact('student'));
+        $userTypes = $this->getUserTypes();
+        $userType = 'estudiante';
+        return view('teachers.edit', compact('student', 'userType', 'userTypes'));
     }
 
     /**
@@ -90,6 +93,7 @@ class TeacherController extends Controller
             'centro' => 'Administrador'
         ];
     }
+
     private function validateRequest(Request $request, $id = null)
     {
         $rules = [
@@ -107,6 +111,7 @@ class TeacherController extends Controller
 
         $request->validate($rules);
     }
+
     private function createStudent(Request $request)
     {
         Usuario::create([
@@ -118,6 +123,7 @@ class TeacherController extends Controller
             'active' => $request->active,
         ]);
     }
+
     private function findStudent($id)
     {
         return Usuario::find($id);
@@ -133,6 +139,10 @@ class TeacherController extends Controller
     private function deleteStudent($id)
     {
         $student = $this->findStudent($id);
+        // Eliminar los archivos del estudiante antes de eliminarlo a él
+        foreach ($student->files as $file) {
+            $file->delete();
+        }
         $student->delete();
     }
 }

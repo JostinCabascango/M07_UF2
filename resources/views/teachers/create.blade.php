@@ -72,7 +72,7 @@
             <input type="submit" value="Enviar" class="bg-blue-500 text-white py-2 px-4 rounded" />
         </div>
     </form>
-    <p class="text-center mb-5">¿Quieres regresar a la pagina principal? <a href="{{ route('teacher.index') }}"
+    <p class="text-center mb-5">¿Quieres regresar a la pagina principal? <a href="{{ route('student.index') }}"
             class="text-blue-500">Regresar</a></p>
 </body>
 

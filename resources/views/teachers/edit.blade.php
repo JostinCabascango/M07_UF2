@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h1 class="text-3xl font-bold text-center text-gray-800 mt-4">Formulario para editar el profesor {{$student->name}}
+    <h1 class="text-3xl font-bold text-center text-gray-800 mt-4">Formulario para editar el estudiante {{$student->name}}
     </h1>
     <form method="post" action="{{ route('teacher.update',$student->id) }}" class="max-w-md mx-auto my-10">
         @csrf
@@ -43,9 +43,12 @@
         <div class="mb-4">
             <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Rol</label>
             <select name="role" class="form-select w-full">
-                <option value="estudiante">Alumno</option>
-                <option value="profesor">Profesor</option>
-                <option value="centro">Admin</option>
+                <!-- SOLO SE PUEDE DAR DE ALTA A UN PROFESOR -->
+                @foreach($userTypes as $key => $value)
+                    @if($key == 'estudiante')
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endif
+                @endforeach
             </select>
             <!-- Mostrar un mensaje de error si el rol es incorrecto -->
             @error('role')
