@@ -23,6 +23,8 @@ class LoginController extends Controller
 
         // Verificar la contraseña
         if ($usuario && Hash::check($request->password, $usuario->password)) {
+            // Pasar el id del usuario a la sesión para asociar el fichero a un usuario
+            session(['user_id' => $usuario->id]);
             // Redirigir al usuario según su rol y pasarle el usuario como parámetro a la ruta
             return $this->redirectUserByRole($usuario->role)->with('usuario', $usuario);
         }
@@ -38,8 +40,8 @@ class LoginController extends Controller
         // Rutas a las que se redirigirá al usuario según su rol
         $routes = [
             'centro' => 'admin.index',
-            'estudiante' => 'alumno.index',
-            'profesor' => 'profesor.index',
+            'estudiante' => 'file.index',
+            'profesor' => 'teacher.index',
         ];
 
         return redirect()->route($routes[$role]);
